@@ -80,7 +80,7 @@ bool AWeaponDefault::CheckWeaponCanFire()
 
 FProjectileInfo AWeaponDefault::GetProjectile()
 {
-	return WeaponSetting.ProjectileSetting;
+	return WeaponSetting.ProjectileSettings;
 }
 
 void AWeaponDefault::Fire()
