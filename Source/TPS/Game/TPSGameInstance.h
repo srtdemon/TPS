@@ -3,13 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/GameInstance.h"
+#include "TPS/FuncLibrary/Types.h"
+#include "Engine/DataTable.h"
+#include "TPS/WeaponDefault.h"
+
+#include "TPSGameInstance.generated.h"
+
 
 /**
  * 
  */
-class TPS_API TPSGameInstance
+UCLASS()
+class TPS_API TPSGameInstance : public UGameInstance
 {
+	GENERATED_BODY()
+
+
 public:
-	TPSGameInstance();
-	~TPSGameInstance();
+	//table
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponSetting")
+		UDataTable* WeaponInfoRable = nullptr;
+	UFUNCTION(BlueprintCallable)
+		FWeaponInfo GetWeaponInfoByName(FName NameWeapon);
 };

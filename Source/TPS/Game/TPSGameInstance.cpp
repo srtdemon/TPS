@@ -1,12 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Game/TPSGameInstance.h"
+#include "TPS/Game/TPSGameInstance.h"
 
-TPSGameInstance::TPSGameInstance()
+FWeaponInfo TPSGameInstance::GetWeaponInfoByName(FName NameWeapon)
 {
+	FWeaponInfo WeaponInfo;
+	return WeaponInfo;
 }
 
-TPSGameInstance::~TPSGameInstance()
-{
-}
