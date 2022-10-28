@@ -15,7 +15,7 @@
  * 
  */
 UCLASS()
-class TPS_API TPSGameInstance : public UGameInstance
+class TPS_API UTPSGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 
@@ -23,7 +23,7 @@ class TPS_API TPSGameInstance : public UGameInstance
 public:
 	//table
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponSetting")
-		UDataTable* WeaponInfoRable = nullptr;
+		UDataTable* WeaponInfoTable = nullptr;
 	UFUNCTION(BlueprintCallable)
-		FWeaponInfo GetWeaponInfoByName(FName NameWeapon);
+		bool GetWeaponInfoByName(FName NameWeapon, FWeaponInfo& OutInfo);
 };

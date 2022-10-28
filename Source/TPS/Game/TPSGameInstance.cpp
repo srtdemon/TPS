@@ -3,9 +3,18 @@
 
 #include "TPS/Game/TPSGameInstance.h"
 
-FWeaponInfo TPSGameInstance::GetWeaponInfoByName(FName NameWeapon)
+bool UTPSGameInstance::GetWeaponInfoByName(FName NameWeapon, FWeaponInfo& OutInfo)
 {
-	FWeaponInfo WeaponInfo;
-	return WeaponInfo;
+	bool bIsFind = false;
+	FWeaponInfo* WeaponInfoRow;
+
+	WeaponInfoRow = WeaponInfoTable->FindRow<FWeaponInfo>(NameWeapon, "", false);
+		if (WeaponInfoRow) 
+		{
+			bIsFind = true;
+			OutInfo = *WeaponInfoRow;
+		}
+	return bIsFind;
 }
 
+  
