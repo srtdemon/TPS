@@ -130,6 +130,7 @@ void ATPSCharacter::SetupPlayerInputComponent(UInputComponent* NewInputComponent
 
 	NewInputComponent->BindAction(TEXT("FireEvent"), EInputEvent::IE_Pressed, this, &ATPSCharacter::InputAttackPressed);
 	NewInputComponent->BindAction(TEXT("FireEvent"), EInputEvent::IE_Released, this, &ATPSCharacter::InputAttackReleased);
+	NewInputComponent->BindAction(TEXT("ReloadEvent"), EInputEvent::IE_Released, this, &ATPSCharacter::TryReloadWeapon);
 }
 
 void ATPSCharacter::InputAxisY(float Value)
@@ -290,6 +291,8 @@ void ATPSCharacter::InitWeapon(FName IdWeapon)
 					myWeapon->AttachToComponent(GetMesh(), Rule, FName("WeaponSocketRightHand"));
 					CurrentWeapon = myWeapon;
 
+					
+					myWeapon->WeaponSetting = myWeaponInfo;
 					myWeapon->UpdateStateWeapon(MovementState);
 				}
 			}
@@ -302,6 +305,17 @@ void ATPSCharacter::InitWeapon(FName IdWeapon)
 
 
 	
+}
+
+void ATPSCharacter::TryReloadWeapon()
+{
+	if (CurrentWeapon) 
+	{
+		if (CurrentWeapon->GetWeaponRound() <= CurrentWeapon->WeaponSetting.MaxRound)
+		{
+			CurrentWeapon->InitReload();
+		}
+	}
 }
 
 UDecalComponent* ATPSCharacter::GetCursorToWorld()

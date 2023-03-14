@@ -44,6 +44,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void FireTick(float DeltaTime);
+	void ReloadTick(float DeltaTime);
 
 	void WeaponInit();
 
@@ -65,5 +66,13 @@ public:
 	void ChangeDispersion();
 
 	//Timers'flags
-	float FireTime = 0.0;
+	float FireTimer = 0.0f;
+	float ReloadTimer = 0.0f;
+
+	UFUNCTION(BlueprintCallable)
+    int32 GetWeaponRound();
+
+	void InitReload();
+	
+	void FinishReload(); 
 };

@@ -41,15 +41,43 @@ void AWeaponDefault::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	FireTick(DeltaTime);
+	ReloadTick(DeltaTime);
 }
 
 void AWeaponDefault::FireTick(float DeltaTime)
 {
 	if (WeaponFiring)
-		if (FireTime < 0.f)
-			Fire();
+		if (FireTimer < 0.f)
+			if (GetWeaponRound() > 0)
+			{
+				if(!WeaponReloading)
+				Fire();
+			}
+			else
+			{
+				if (!WeaponReloading)
+				{
+					InitReload();
+				}
+			}
 		else
-			FireTime -= DeltaTime;
+			FireTimer -= DeltaTime;
+}
+
+void AWeaponDefault::ReloadTick(float DeltaTime)
+{
+	if (WeaponReloading)
+	{
+		if (ReloadTimer < 0.0f)
+		{
+			FinishReload();
+	    }  
+		else
+		{
+			ReloadTimer -= DeltaTime;
+		}
+
+	}
 }
 
 void AWeaponDefault::WeaponInit()
@@ -85,7 +113,8 @@ FProjectileInfo AWeaponDefault::GetProjectile()
 
 void AWeaponDefault::Fire()
 {
-	FireTime = WeaponSetting.RateOfFire;
+	FireTimer = WeaponSetting.RateOfFire;
+	WeaponInfo.Round = WeaponInfo.Round - 1;
 
 	if (ShootLocation)
 	{
@@ -110,6 +139,7 @@ void AWeaponDefault::Fire()
 				myProjectile->InitialLifeSpan = 20.0f;
 				//Projectile->BulletProjectileMovement->InitialSpeed = 2500.0f;
 			}
+
 		}
 		else
 		{
@@ -126,4 +156,22 @@ void AWeaponDefault::UpdateStateWeapon(EMovementState NewMovementState)
 
 void AWeaponDefault::ChangeDispersion()
 {
+}
+
+int32 AWeaponDefault::GetWeaponRound()
+{
+	return WeaponInfo.Round;
+}
+
+void AWeaponDefault::InitReload()
+{
+	WeaponReloading = true;
+
+	ReloadTimer = WeaponSetting.ReloadTime; 
+} //ToDo anim reload
+
+void AWeaponDefault::FinishReload()
+{
+	WeaponReloading = false;
+	WeaponInfo.Round = WeaponSetting.MaxRound;
 }

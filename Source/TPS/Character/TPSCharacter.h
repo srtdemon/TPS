@@ -108,6 +108,8 @@ public:
 		AWeaponDefault* GetCurrentWeapon();
 	UFUNCTION(BlueprintCallable)
 		void InitWeapon(FName IdWeapon);
+	UFUNCTION(BlueprintCallable)
+		void TryReloadWeapon();
 
 	UFUNCTION(BlueprintCallable)
 		UDecalComponent* GetCursorToWorld();
