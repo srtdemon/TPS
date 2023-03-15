@@ -46,22 +46,25 @@ void AWeaponDefault::Tick(float DeltaTime)
 
 void AWeaponDefault::FireTick(float DeltaTime)
 {
-	if (WeaponFiring)
-		if (FireTimer < 0.f)
-			if (GetWeaponRound() > 0)
-			{
-				if(!WeaponReloading)
-				Fire();
-			}
-			else
+	if (GetWeaponRound() > 0)
+	{
+		if (WeaponFiring)
+		{
+			if (FireTimer < 0.f)
 			{
 				if (!WeaponReloading)
-				{
-					InitReload();
-				}
+					Fire();
 			}
-		else
-			FireTimer -= DeltaTime;
+			else
+				FireTimer -= DeltaTime;
+		}
+		
+	}
+	else
+	{
+		if (!WeaponReloading)
+			InitReload();
+	}
 }
 
 void AWeaponDefault::ReloadTick(float DeltaTime)
@@ -91,6 +94,7 @@ void AWeaponDefault::WeaponInit()
 	{
 		StaticMeshWeapon->DestroyComponent();
 	}
+	
 }
 
 void AWeaponDefault::SetWeaponStateFire(bool bIsFire)

@@ -293,12 +293,15 @@ void ATPSCharacter::InitWeapon(FName IdWeapon)
 
 					
 					myWeapon->WeaponSetting = myWeaponInfo;
+					myWeapon->WeaponInfo.Round = myWeaponInfo.MaxRound;
+					// remove DEBUG!!!
+					myWeapon->ReloadTime = myWeaponInfo.ReloadTime;
 					myWeapon->UpdateStateWeapon(MovementState);
 				}
 			}
 		}
 		else
-		{
+		{ 
 			UE_LOG(LogTemp, Warning, TEXT("ATPSCharacter::InitWeapon - Weapon not found in table -NULL"));
 		}
 	}

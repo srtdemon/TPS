@@ -50,7 +50,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FireLogic")
 		bool WeaponFiring = false;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FireLogic")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ReloadLogic")
 		bool WeaponReloading = false;
 
 	UFUNCTION(BlueprintCallable)
@@ -67,7 +67,11 @@ public:
 
 	//Timers'flags
 	float FireTimer = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ReloadLogic")
 	float ReloadTimer = 0.0f;
+	// remove DEBUG!!!
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ReloadLogic Debug")
+	float ReloadTime = 0.0f;
 
 	UFUNCTION(BlueprintCallable)
     int32 GetWeaponRound();
