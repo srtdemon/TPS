@@ -67,8 +67,10 @@ public:
 	void ChangeDispersion();
 	float GetCurrentDispersion()const;
 	FVector ApplyDispersionToShoot(FVector DirectionShoot)const;
+	void ChangeDispersionByShot();
 
 	FVector GetFireEndLocation() const;
+	int8 GetNumberProjectileByShot() const;
 
 	//Timers'flags
 	float FireTimer = 0.0f;
@@ -98,9 +100,7 @@ public:
 	void FinishReload(); 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
-		bool ShowDebug = false;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
-		bool byBarrel = false;
+		bool ShowDebug = false; 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
 		float SizeVectorToChangeShootDirectionLogic = 100.0f;
 };

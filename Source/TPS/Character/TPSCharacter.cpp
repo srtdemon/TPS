@@ -183,15 +183,19 @@ void ATPSCharacter::MovementTick(float DeltaTime)
 				{
 				case EMovementState::Aim_State:
 					Displacement = FVector(0.0f, 0.0f, 160.0f);
+					CurrentWeapon->ShouldReduceDispersion = true;
 					break;
 				case EMovementState::AimWalk_State:
 					Displacement = FVector(0.0f, 0.0f, 160.0f);
+					CurrentWeapon->ShouldReduceDispersion = true;
 					break;
 				case EMovementState::Walk_State:
 					Displacement = FVector(0.0f, 0.0f, 120.0f);
+					CurrentWeapon->ShouldReduceDispersion = false;
 					break;
 				case EMovementState::Run_State:
 					Displacement = FVector(0.0f, 0.0f, 120.0f);
+					CurrentWeapon->ShouldReduceDispersion = false;
 					break;
 				case EMovementState::SprintRun_State:
 					break;
@@ -204,11 +208,6 @@ void ATPSCharacter::MovementTick(float DeltaTime)
 			}
 		}
 	}
-	if (CurrentWeapon)
-		if (FMath::IsNearlyZero(GetVelocity().Size(), 0.5f))
-			CurrentWeapon->ShouldReduceDispersion = true;
-		else
-			CurrentWeapon->ShouldReduceDispersion = false;
 }
 
 void ATPSCharacter::AttackCharEvent(bool bIsFiring)
@@ -299,12 +298,12 @@ AWeaponDefault* ATPSCharacter::GetCurrentWeapon()
 	return CurrentWeapon;
 }
 
-void ATPSCharacter::InitWeapon(FName IdWeapon)
+void ATPSCharacter::InitWeapon(FName IdWeaponName)
 {
 	UTPSGameInstance* myGI = Cast<UTPSGameInstance>(GetGameInstance());
 	FWeaponInfo myWeaponInfo;
 	if (myGI) {
-		if (myGI->GetWeaponInfoByName(IdWeapon, myWeaponInfo))
+		if (myGI->GetWeaponInfoByName(IdWeaponName, myWeaponInfo))
 		{
 			if (myWeaponInfo.WeaponClass)
 			{

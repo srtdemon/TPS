@@ -113,6 +113,8 @@ struct FWeaponInfo : public FTableRowBase
 		float ReloadTime = 2.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
 		int32 MaxRound = 10;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
+		int32 NumberProjectileByShot = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dispersion")
 		FWeaponDispersion DispersionWeapon;
