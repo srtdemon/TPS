@@ -319,11 +319,17 @@ void AWeaponDefault::InitReload()
 {
 	WeaponReloading = true;
 
-	ReloadTimer = WeaponSetting.ReloadTime; 
-} //ToDo anim reload
+	ReloadTimer = WeaponSetting.ReloadTime;
+	
+	//ToDo anim reload
+	if(WeaponSetting.AnimCharReload)
+	    OnWeaponReloadStart.Broadcast(WeaponSetting.AnimCharReload);
+}
 
 void AWeaponDefault::FinishReload()
 {
-	WeaponReloading = false;
+	WeaponReloading = false; 
 	WeaponInfo.Round = WeaponSetting.MaxRound;
+
+	OnWeaponReloadEnd.Broadcast();
 }

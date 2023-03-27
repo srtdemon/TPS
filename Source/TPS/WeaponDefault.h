@@ -11,6 +11,8 @@
 #include "WeaponDefault.generated.h"
 
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWeaponFireStart);//ToDo Delegate on event weapon fire - Anim char, state char...
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponReloadStart, UAnimMontage*, Anim);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWeaponReloadEnd);
 
 UCLASS()
 class TPS_API AWeaponDefault : public AActor
@@ -20,6 +22,9 @@ class TPS_API AWeaponDefault : public AActor
 public:
 	// Sets default values for this actor's properties
 	AWeaponDefault();
+
+	FOnWeaponReloadStart OnWeaponReloadStart;
+	FOnWeaponReloadEnd OnWeaponReloadEnd;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = Components)
 		class USceneComponent* SceneComponent = nullptr;

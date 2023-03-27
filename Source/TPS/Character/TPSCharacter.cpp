@@ -328,6 +328,9 @@ void ATPSCharacter::InitWeapon(FName IdWeaponName)
 					// remove DEBUG!!!
 					myWeapon->ReloadTime = myWeaponInfo.ReloadTime;
 					myWeapon->UpdateStateWeapon(MovementState);
+
+					myWeapon->OnWeaponReloadStart.AddDynamic(this, &ATPSCharacter::WeaponReloadStart);
+					myWeapon->OnWeaponReloadEnd.AddDynamic(this, &ATPSCharacter::WeaponReloadEnd);
 				}
 			}
 		}
@@ -350,6 +353,26 @@ void ATPSCharacter::TryReloadWeapon()
 			CurrentWeapon->InitReload();
 		}
 	}
+}
+
+void ATPSCharacter::WeaponReloadStart(UAnimMontage* Anim)
+{
+	WeaponReloadStart_BP(Anim);
+}
+
+void ATPSCharacter::WeaponReloadEnd()
+{
+	WeaponReloadEnd_BP();
+}
+
+void ATPSCharacter::WeaponReloadStart_BP_Implementation(UAnimMontage* Anim)
+{
+	// in BP
+}
+
+void ATPSCharacter::WeaponReloadEnd_BP_Implementation()
+{
+	// in BP
 }
 
 UDecalComponent* ATPSCharacter::GetCursorToWorld()
