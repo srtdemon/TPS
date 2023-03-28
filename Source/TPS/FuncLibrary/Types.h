@@ -56,11 +56,11 @@ struct FProjectileInfo
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileSetting")
 	TMap<TEnumAsByte<EPhysicalSurface>, UMaterialInterface*> HitDecals;
 	//Sound when hit
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileSetting")
-	//USoundBase* HitSound = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileSetting")
+	USoundBase* HitSound = nullptr;
 	//fx when hit check by surface
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileSetting")
-	//TMap<TEnumAsByte<EPhysicalSurface>, UParticleSystem*> HitFXs;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileSetting")
+	TMap<TEnumAsByte<EPhysicalSurface>, UParticleSystem*> HitFXs;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileSettings")
 		bool bIsLikeBomp = false;
