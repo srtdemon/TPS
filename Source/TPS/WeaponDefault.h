@@ -64,7 +64,6 @@ public:
 	bool CheckWeaponCanFire();
 	void DispersionTick(float DeltaTime);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FireLogic")
 	FProjectileInfo GetProjectile();
 
 	void Fire();

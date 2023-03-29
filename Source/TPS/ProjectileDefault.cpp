@@ -60,6 +60,7 @@ void AProjectileDefault::Tick(float DeltaTime)
 void AProjectileDefault::InitProjectile(FProjectileInfo InitParam)
 {
 	BulletProjectileMovement->InitialSpeed = InitParam.ProjectileInitSpeed;
+	BulletProjectileMovement->MaxSpeed = InitParam.ProjectileInitSpeed;
 	this->SetLifeSpan(InitParam.ProjectileLifeTime);
 
 	ProjectileSetting = InitParam;
@@ -98,6 +99,7 @@ void AProjectileDefault::BulletCollisionSphereHit(UPrimitiveComponent* HitComp, 
 
 	}
 	UGameplayStatics::ApplyDamage(OtherActor, ProjectileSetting.ProjectileDamage, GetInstigatorController(), this, NULL);
+	ImpactProjectile();
 	//UGameplayStatics::ApplyRadialDamageWithFalloff()
 	//Apply damage cast to if char like bp? //OnAnyTakeDmage delegate
 	//UGameplayStatics::ApplyDamage(OtherActor, ProjectileSetting.ProjectileDamage, GetOwner()->GetInstigatorController(), GetOwner(), NULL);
@@ -111,4 +113,9 @@ void AProjectileDefault::BulletCollisionSphereBeginOverlap(UPrimitiveComponent* 
 
 void AProjectileDefault::BulletCollisionSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+}
+
+void AProjectileDefault::ImpactProjectile()
+{
+	this->Destroy();
 }
